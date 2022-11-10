@@ -3,8 +3,8 @@ package io.qase.ui.config;
 import org.aeonbits.owner.Config;
 
 @Config.Sources({
-        "system:env",
-        "system:properties"
+        "system:properties",
+        "system:env"
 })
 public interface AppConfig extends Config {
 
