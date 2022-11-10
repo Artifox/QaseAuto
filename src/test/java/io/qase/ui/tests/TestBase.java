@@ -7,7 +7,9 @@ import io.qase.ui.config.CredentialsConfig;
 import io.qase.ui.helpers.Attach;
 import io.qase.ui.helpers.DriverSettings;
 import io.qase.ui.pages.LoginPage;
+import io.qase.ui.pages.ProjectListPage;
 import io.qase.ui.pages.ProjectPage;
+import io.qase.ui.utils.TestData;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -25,12 +27,16 @@ public class TestBase {
     public static CredentialsConfig credConfig = ConfigFactory.create(CredentialsConfig.class);
 
     protected LoginPage loginPage;
+    protected ProjectListPage projectListPage;
     protected ProjectPage projectPage;
+    protected TestData testData;
 
     @BeforeAll
     void setUp() {
         DriverSettings.configure();
+        testData = new TestData();
         loginPage = new LoginPage();
+        projectListPage = new ProjectListPage();
         projectPage = new ProjectPage();
     }
 

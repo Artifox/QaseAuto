@@ -15,10 +15,16 @@ public class ProjectTests extends TestBase {
             loginPage.open();
         });
         step("Login to app", () -> {
-           loginPage.login();
+            loginPage.login();
+            projectListPage.isProjectPageOpened();
         });
-        step("Project page should be opened", () -> {
-            projectPage.isProjectPageOpened();
+        step("Create a new project", () -> {
+            projectListPage.clickOnCreateNewProjectButton();
+            projectListPage.fillCreateNewProjectForm(testData.projectName, testData.projectCode);
+            projectListPage.pressSubmitButton();
+        });
+        step("Project should be created", () -> {
+            projectPage.isRepositoryCodeVisible(testData.projectCode);
         });
     }
 }
