@@ -29,9 +29,8 @@ public class DriverSettings {
         if (isRemoteWebDriver()) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
-            Configuration.remote = appConfig.getRemoteUrl();
             Configuration.remote = String.format("https://%s:%s@%s/wd/hub/",
-                    credConfig.getSelenoidUsername(), credConfig.getSelenoidPassword(), appConfig.getRemoteUrl());
+                    credConfig.getSelenoidUsername(), credConfig.getSelenoidPassword(), appConfig.getRemoteDriverUrl());
         }
 
 
@@ -40,6 +39,6 @@ public class DriverSettings {
     }
 
     public static boolean isRemoteWebDriver() {
-        return !appConfig.getRemoteUrl().equals("");
+        return !appConfig.getRemoteDriverUrl().equals("");
     }
 }
