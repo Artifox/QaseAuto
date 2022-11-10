@@ -23,6 +23,12 @@ public class DriverSettings {
         System.out.println(appConfig.getBaseUrl());
         System.out.println(appConfig.getRemoteDriverUrl());
 
+        System.out.println(System.getProperty("browser"));
+        System.out.println(System.getProperty("browserVersion"));
+        System.out.println(System.getProperty("browserSize"));
+        System.out.println(System.getProperty("baseUrl"));
+        System.out.println(System.getProperty("remoteDriverUrl"));
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
 
