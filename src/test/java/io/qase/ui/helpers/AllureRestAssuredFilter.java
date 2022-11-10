@@ -1,4 +1,4 @@
-package cloud.autotests.helpers;
+package io.qase.ui.helpers;
 
 import io.qameta.allure.restassured.AllureRestAssured;
 

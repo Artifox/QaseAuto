@@ -1,20 +1,21 @@
-package cloud.autotests.helpers;
+package io.qase.ui.helpers;
 
-import cloud.autotests.config.Project;
 import com.codeborne.selenide.Configuration;
+import io.qase.ui.config.AppConfig;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import java.util.HashMap;
-import java.util.Map;
+import static io.qase.ui.tests.TestBase.credConfig;
 
 public class DriverSettings {
+    public static AppConfig appConfig = ConfigFactory.create(AppConfig.class);
 
     public static void configure() {
-        Configuration.browser = Project.config.browser();
-        Configuration.browserVersion = Project.config.browserVersion();
-        Configuration.browserSize = Project.config.browserSize();
-//        Configuration.baseUrl = App.config.webUrl();
+        Configuration.browser = appConfig.getBrowser();
+        Configuration.browserVersion = appConfig.getBrowserVersion();
+        Configuration.browserSize = appConfig.getBrowserSize();
+        Configuration.baseUrl = appConfig.getBaseUrl();
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
@@ -25,19 +26,20 @@ public class DriverSettings {
         chromeOptions.addArguments("--disable-notifications");
         chromeOptions.addArguments("--lang=en-en");
 
-        if (Project.isWebMobile()) { // for chrome only
-            Map<String, Object> mobileDevice = new HashMap<>();
-            mobileDevice.put("deviceName", Project.config.browserMobileView());
-            chromeOptions.setExperimentalOption("mobileEmulation", mobileDevice);
-        }
-
-        if (Project.isRemoteWebDriver()) {
+        if (isRemoteWebDriver()) {
             capabilities.setCapability("enableVNC", true);
             capabilities.setCapability("enableVideo", true);
-            Configuration.remote = Project.config.remoteDriverUrl();
+            Configuration.remote = appConfig.getRemoteUrl();
+            Configuration.remote = String.format("https://%s:%s@%s/wd/hub/",
+                    credConfig.getSelenoidUsername(), credConfig.getSelenoidPassword(), appConfig.getRemoteUrl());
         }
+
 
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         Configuration.browserCapabilities = capabilities;
+    }
+
+    public static boolean isRemoteWebDriver() {
+        return !appConfig.getRemoteUrl().equals("");
     }
 }
