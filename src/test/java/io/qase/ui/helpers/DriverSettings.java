@@ -17,6 +17,12 @@ public class DriverSettings {
         Configuration.browserSize = appConfig.getBrowserSize();
         Configuration.baseUrl = appConfig.getBaseUrl();
 
+        System.out.println(appConfig.getBrowser());
+        System.out.println(appConfig.getBrowserVersion());
+        System.out.println(appConfig.getBrowserSize());
+        System.out.println(appConfig.getBaseUrl());
+        System.out.println(appConfig.getRemoteDriverUrl());
+
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
 
