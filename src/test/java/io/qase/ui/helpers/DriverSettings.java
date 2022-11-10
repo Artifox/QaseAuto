@@ -17,18 +17,6 @@ public class DriverSettings {
         Configuration.browserSize = appConfig.getBrowserSize();
         Configuration.baseUrl = appConfig.getBaseUrl();
 
-        System.out.println(appConfig.getBrowser());
-        System.out.println(appConfig.getBrowserVersion());
-        System.out.println(appConfig.getBrowserSize());
-        System.out.println(appConfig.getBaseUrl());
-        System.out.println(appConfig.getRemoteDriverUrl());
-
-        System.out.println(System.getProperty("browser"));
-        System.out.println(System.getProperty("browserVersion"));
-        System.out.println(System.getProperty("browserSize"));
-        System.out.println(System.getProperty("baseUrl"));
-        System.out.println(System.getProperty("remoteDriverUrl"));
-
         DesiredCapabilities capabilities = new DesiredCapabilities();
         ChromeOptions chromeOptions = new ChromeOptions();
 
@@ -43,6 +31,7 @@ public class DriverSettings {
             capabilities.setCapability("enableVideo", true);
             Configuration.remote = String.format("https://%s:%s@%s/wd/hub/",
                     credConfig.getSelenoidUsername(), credConfig.getSelenoidPassword(), appConfig.getRemoteDriverUrl());
+            System.out.println(Configuration.remote);
         }
 
 

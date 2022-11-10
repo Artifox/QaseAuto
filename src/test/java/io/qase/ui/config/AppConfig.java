@@ -4,7 +4,7 @@ import org.aeonbits.owner.Config;
 
 @Config.Sources({
         "system:properties",
-        "system:env"
+        "classpath:config/${env}.properties"
 })
 public interface AppConfig extends Config {
 
